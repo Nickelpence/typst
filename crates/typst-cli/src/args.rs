@@ -1,3 +1,8 @@
+// This module is imported both from the `typst-cli` crate itself
+// and from its build script. In this module, you can only import from crates
+// that are both runtime and build dependencies of this crate, or else
+// Rust will give a confusing error message about a missing crate.
+
 use std::fmt::{self, Display, Formatter};
 use std::io::Write;
 use std::num::NonZeroUsize;
@@ -421,6 +426,11 @@ pub struct FontArgs {
     /// `--font-path`.
     #[arg(long, env = "TYPST_IGNORE_SYSTEM_FONTS")]
     pub ignore_system_fonts: bool,
+
+    /// Ensures fonts embedded into Typst won't be considered.
+    #[cfg(feature = "embed-fonts")]
+    #[arg(long, env = "TYPST_IGNORE_EMBEDDED_FONTS")]
+    pub ignore_embedded_fonts: bool,
 }
 
 /// Arguments for the HTTP server.
