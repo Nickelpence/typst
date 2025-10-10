@@ -15,7 +15,7 @@ you have the following configuration options:
 - Which [PDF standards](#pdf-standards) Typst should enforce conformance with by
   specifying `--pdf-standard` followed by one or multiple comma-separated
   standards. Valid standards are `1.4`, `1.5`, `1.6`, `1.7`, `2.0`, `a-1b`,
-  `a-1a`, `a-2b`, `a-2u`, `a-2a`, `a-3b`. `a-3u`, `a-3a`, `a-4`, `a-4f`, `a-4e`,
+  `a-1a`, `a-2b`, `a-2u`, `a-2a`, `a-3b`, `a-3u`, `a-3a`, `a-4`, `a-4f`, `a-4e`,
   and `ua-1`. By default, Typst outputs PDF-1.7-compliant files.
 
 - You can disable PDF tagging completely with `--no-pdf-tags`. By default, Typst
@@ -50,6 +50,30 @@ specific use-cases. By default, Typst exports PDF 1.7 files. Adobe Acrobat 8 and
 later as well as all other commonly used PDF viewers are compatible with this
 PDF version. Some features of Typst may not be available depending on the PDF
 standard you choose.
+
+## PDF versions
+Typst supports five different PDF versions: 1.4, 1.5, 1.6, 1.7 (default), and
+2.0. You can choose each of these versions for your document export. However,
+based on the features you used there may be a minimum version. Likewise, the
+standards you target can limit which versions you can choose (see below for
+more).
+
+Here is a list on how each new version improves over PDF 1.4 for Typst
+documents:
+
+- **PDF 1.5** (2003): Improved color management, text extraction, table
+  accessibility, reflow, and emoji fonts
+- **PDF 1.6** (2004): More flexible links
+- **PDF 1.7** (2006): Allows [attachments]($pdf.attach), improved reflow
+- **PDF 2.0** (2017): Improved both metadata and tag semantics for accessibility
+
+The software used to read your file must support your PDF version. Under normal
+circumstances, this poses no problem, but it can be a source of errors when
+working with older hardware. For general exchange, we recommend keeping the
+default PDF 1.7 setting or choosing PDF 2.0.
+
+When using PDF files as [images]($image) in your document, the export PDF
+version must equal or exceed the image file versions.
 
 ## PDF/UA
 Typst supports writing PDF/UA-conformant files. PDF/UA files are designed
@@ -178,7 +202,7 @@ questions:
 3. **Does your file need to use features introduced in PDF 2.0?** Currently, use
    of PDF 2.0 features in Typst is limited to minor improvements in
    accessibility, e.g. for the [title element]($title). If you can do without
-   these improvements, maximize compatibilty by choosing part two (when you
+   these improvements, maximize compatibility by choosing part two (when you
    don't need attachments) or part three (when you do need attachments). If you
    rely on PDF 2.0 features, use part four.
 
